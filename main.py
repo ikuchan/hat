@@ -32,5 +32,5 @@ class JobHandler(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/job', JobHandler)
+    ('/', JobHandler)
 ], debug=True)
