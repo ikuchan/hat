@@ -15,9 +15,11 @@ handlers:
 - url: /static/js
   static_dir: static/js
 
+- url: /post
+  script: post.app
+
 - url: /
-  static_files: static/html/index.html
-  upload: static/html/index.html
+  static_dir: static/html
 
 - url: .*
   script: main.app
