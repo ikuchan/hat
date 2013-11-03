@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import cgi
 import webapp2
 from django.utils import simplejson
 from google.appengine.ext import db
@@ -23,29 +24,31 @@ class Greeting(db.Model):
 	content = db.StringProperty(multiline=True)
 	date = db.DateTimeProperty(auto_now_add=True)
 
+class Task(db.Model):
+	client_name = db.StringProperty()
+	client_address = db.StringProperty(multiline=True)
+	date = db.DateTimeProperty(auto_now_add=True)
+
 
 
 class PostHandler(webapp2.RequestHandler):
 	def post(self):
-		obj = {
-			'success': 'hogehoge',
-			'test': 'fugafuga',
-		}
-		greeting = Greeting()
-		greeting.author = "test_author_name"
-		greeting.content = "test_content"
-		greeting.put()
+		form = cgi.FieldStorage()
+		task = Task()
+		task.client_name   = form["client_name"].value
+		task.client_address = form["client_address"].value
+		task.put()
 
 		self.response.out.write('<html><body>')
-		greetings = db.GqlQuery("SELECT * FROM Greeting ORDER BY date DESC LIMIT 10")
-		greetingDict = {}
-		for greeting in greetings:
-			greetingDict[greeting.author] = {
-							'author': greeting.author,
-							'content': greeting.content
-							}
+		tasks = db.GqlQuery("SELECT * FROM Task ORDER BY date DESC LIMIT 10")
+		returnDict = {'status':'success'}
+		taskDict = {}
+		for task in greetings:
+			taskDict[task.client_name] = {'client_name': task.client_name,'client_address': task.client_address}
 
-		self.response.out.write(simplejson.dumps(greetingDict))
+		returnDict['origin']=taskDict
+
+		self.response.out.write(simplejson.dumps(returnDict))
 
 
 	def get(self):
