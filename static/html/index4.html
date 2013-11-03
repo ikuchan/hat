@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<title>HAT</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+<script type="text/javascript"src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.rating.js"></script>
+<link href="../css/jquery.rating.css" type="text/css" rel="stylesheet"/>
+</div>
+</head>
+<body>
+<div data-role="page" id="main">
+<div data-role="header" data-position="fixed">
+<h1>HAT体験</h1>
+  </div><!-- /header -->
+  <div data-role="content">
+    <a href="#add" data-role="button" data-inline="true">東部</a><br>
+    <a href="#add" data-role="button" data-inline="true">西部</a><br>
+    <a href="#add" data-role="button" data-inline="true">南部</a><br>
+    </div><!-- content -->
+</div><!-- main -->
+
+<div data-role="page" id="add">
+<div data-role="header" data-position="fixed">
+<h1>東部</h1>
+</div><!-- /header -->
+<div data-role="content">
+<p>現在時刻</p>
+<div id="mclock" style="font-size:22px"></div>
+<p>名前<input type="text" name="client-name" value=""></p>
+<p>住所<input type="text" name="client-address" value=""></p>
+<p>仕事のタイプ<input type="text" name="types" value=""></p>
+<p>募集開始<input type="text" name="start-date" value=""></p>
+<p>募集終了<input type="text" name="end-date" value=""></p>
+<p>開始時間<input type="text" name="start-time" value=""></p>                    <p>労働時間<input type="text" name="work-time" value=""></p>
+<p>報酬<input type="text" name="reward" value=""></p>
+<p>困難さ(1~5)</p>
+<table cellspacing="5">
+<td>
+<pre class="code"><code class="html"></code></pre></td>
+<input class="star" type="radio" name="star1"/>
+<input class="star" type="radio" name="star1"/>
+<input class="star" type="radio" name="star1"/>
+<input class="star" type="radio" name="star1"/>
+<input class="star" type="radio" name="star1"/>
+</table>
+<p>現在地</p>
+<div id="pos">lat, lng, accuracy</div>
+<p>備考<input type="text" name="remark" value=""></p>
+<p>イメージ<input type="file" accept="image/*"></p>
+<input type="button" value="登録">
+                <!-- <p><a href="#setting">設定</a></p> -->
+        </div><!-- /content -->
+</div><!-- /page -->
+<div data-role="page" id="setting">
+        <div data-role="header" data-position="fixed">
+                <h1>Settings</h1>
+                <a href="#main" data-rel="back">メイン</a>
+        </div><!-- /header -->
+
+        <div data-role="content">
+        </div><!-- /content -->
+</div><!-- page -->
+
+<script language="javascript">
+window.onload = function(){
+	navigator.geolocation.watchPosition(update);
+}
+// 位置が検出されたら緯度、経度、誤差と時間を表示
+function update(position){
+	var lat = position.coords.latitude;
+	var lng = position.coords.longitude;
+	var acc = position.coords.accuracy;
+	document.getElementById("pos").innerHTML = lat+","+lng;
+}
+$(function(){
+        setInterval(function(){
+        var now = new Date();
+        hou = toDD(now.getHours());
+        min = toDD(now.getMinutes());
+        sec = toDD(now.getSeconds());
+        $('#mclock').text(hou +":"+ min +":"+ sec);
+        },1000);
+});
+var toDD = function(num){
+        num += "";
+        if(num.length === 1){num = "0" + num;}
+        return num;
+};
+</script>
+<script src="http://api.its-mo.com/cgi/loader.cgi?key=b975d9ed9e45666907eeb9519b7f59fe&ver=2.0&api=zdcmap.js,search.js&enc=UTF-8&force=1" type="text/javascript"></script>
+</body>
+</html>

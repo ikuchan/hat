@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import cgi
 import webapp2
 from django.utils import simplejson
 from google.appengine.ext import db
@@ -33,24 +32,22 @@ class Task(db.Model):
 
 class PostHandler(webapp2.RequestHandler):
 	def post(self):
-		form = cgi.FieldStorage()
 		task = Task()
-		task.client_name   = form["client_name"].value
-		task.client_address = form["client_address"].value
+		task.client_name   = self.request.get('client_name')
+		task.client_address = self.request.get('client_address')
 		task.put()
-
-		self.response.out.write('<html><body>')
+"""
 		tasks = db.GqlQuery("SELECT * FROM Task ORDER BY date DESC LIMIT 10")
 		returnDict = {'status':'success'}
 		taskDict = {}
-		for task in greetings:
+		for task in tasks:
 			taskDict[task.client_name] = {'client_name': task.client_name,'client_address': task.client_address}
 
 		returnDict['origin']=taskDict
 
 		self.response.out.write(simplejson.dumps(returnDict))
-
-
+"""
+"""
 	def get(self):
 		self.response.headers['Content-type'] = 'application/json';
 		self.response.out.write('<html><body>')
@@ -63,10 +60,10 @@ class PostHandler(webapp2.RequestHandler):
 				self.response.out.write('<blockquote>%s</blockquote>' %
 					cgi.escape(greeting.content))
 
-				self.response.out.write("""
-					</body>
-					</html>""")
-
+				self.response.out.write("</body></html>")
+"""
 app = webapp2.WSGIApplication([
     ('/post', PostHandler)
 ], debug=True)
+
+
