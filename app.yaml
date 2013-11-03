@@ -21,6 +21,9 @@ handlers:
 - url: /post
   script: post.app
 
+- url: /tags
+  script: tags.app
+
 - url: /
   static_files: static/html/index.html
   upload: static/html/index.html
@@ -31,3 +34,5 @@ handlers:
 libraries:
 - name: webapp2
   version: "2.5.2"
+- name: django
+  version: "1.2"
