@@ -23,12 +23,16 @@ jQuery(function($){
 	});
 
 	$('.js-search').click(function(){
-		$('#result').fadeIn();
-		
+		$.getJSON('/get', function(response){
+			for (var i = 0; i < response.length; i++) {
+				var row = response[i];
+				var $template = $($('.js-row-template').html());
 
-		// $.getJSON('/', function(response){
-		// 	// $('#result').empty();
-		// });
+				$template.find('.js-client dd').text(row.client_name + 'さん')
+
+				$('#result').append($template);
+			}
+		});
 		return false;
 	});
 

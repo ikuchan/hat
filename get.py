@@ -32,7 +32,8 @@ class PostHandler(webapp2.RequestHandler):
 		taskList = []
 		for task in tasks:
 			taskList.append({'client_name': task.client_name,'client_address': task.client_address})
-
+		
+		self.response.headers['Content-type'] = 'application/json';
 		self.response.out.write(simplejson.dumps(taskList))
 app = webapp2.WSGIApplication([
     ('/get', PostHandler)
