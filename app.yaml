@@ -18,6 +18,9 @@ handlers:
 - url: /post
   script: post.app
 
+- url: /test
+  script: test.app
+
 - url: /get
   script: get.app
 
