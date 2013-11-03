@@ -18,6 +18,9 @@ handlers:
 - url: /post
   script: post.app
 
+- url: /tags
+  script: tags.app
+
 - url: /
   static_dir: static/html
 
