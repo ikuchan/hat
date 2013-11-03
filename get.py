@@ -22,21 +22,28 @@ from google.appengine.ext import db
 class Task(db.Model):
 	client_name = db.StringProperty()
 	client_address = db.StringProperty(multiline=True)
+	tags = db.StringProperty(multiline=True)
+	content = db.StringProperty(multiline=True)
+	start_date = db.DateProperty()
+	end_date = db.DateProperty()
+	start_at = db.TimeProperty()
+	hour = db.IntegerProperty()
+	reward = db.StringProperty()
+	difficulty = db.IntegerProperty()
 	date = db.DateTimeProperty(auto_now_add=True)
 
 
 
-class PostHandler(webapp2.RequestHandler):
+class GetHandler(webapp2.RequestHandler):
 	def get(self):
 		tasks = db.GqlQuery("SELECT * FROM Task ORDER BY date DESC")
 		taskList = []
 		for task in tasks:
 			taskList.append({'client_name': task.client_name,'client_address': task.client_address})
-		
 		self.response.headers['Content-type'] = 'application/json';
 		self.response.out.write(simplejson.dumps(taskList))
 app = webapp2.WSGIApplication([
-    ('/get', PostHandler)
+    ('/get', GetHandler)
 ], debug=True)
 
 

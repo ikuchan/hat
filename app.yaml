@@ -12,10 +12,16 @@ handlers:
 - url: /static/css
   static_dir: static/css
 
+- url: /css
+  static_dir: static/css
+
 - url: /static/image
   static_dir: static/image
 
 - url: /static/js
+  static_dir: static/js
+
+- url: /js
   static_dir: static/js
 
 - url: /post
@@ -36,6 +42,11 @@ handlers:
 - url: /
   static_files: static/html/index.html
   upload: static/html/index.html
+
+- url: /index4.html
+  static_files: static/html/index4.html
+  upload: static/html/index4.html
+
 
 - url: .*
   script: main.app
