@@ -839,7 +839,7 @@ textarea {
     font-weight:bold;
     font-size:28px;
     padding : 10px 20px;
-    }
+}
 
     .btn:hover {
         filter: alpha(opacity=65);
