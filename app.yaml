@@ -27,6 +27,9 @@ handlers:
 - url: /get
   script: get.app
 
+- url: /find
+  script: find.app
+
 - url: /tags
   script: tags.app
 
