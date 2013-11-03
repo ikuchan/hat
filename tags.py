@@ -24,6 +24,26 @@ class TagsHandler(webapp2.RequestHandler):
 		obj = {
 			'tag_test_name1': '',
 			'tag_test_name2': '',
+			'tag_test_name3': '',
+			'tag_test_name4': '',
+			'tag_test_name5': '',
+			'tag_test_name6': '',
+			'tag_test_name7': '',
+			'tag_test_name8': '',
+			'tag_test_name9': '',
+			'tag_test_name10': '',
+			'tag_test_name11': '',
+			'tag_test_name12': '',
+			'tag_test_name13': '',
+			'tag_test_name14': '',
+			'tag_test_name15': '',
+			'tag_test_name16': '',
+			'tag_test_name17': '',
+			'tag_test_name18': '',
+			'tag_test_name19': '',
+			'tag_test_name20': '',
+			'tag_test_name21': '',
+			'tag_test_name22': '',
 		}
 		self.response.out.write(simplejson.dumps(obj))
 
