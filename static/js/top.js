@@ -2,7 +2,7 @@ jQuery(function($){
 	$('.js-open-tags').click(function(){
 		$.getJSON('/tags', function(tags){
 			$('.js-tags').empty();
-			
+
 			var $list = $('<ul>');
 			for (var i = 0; i < tags.length; i++) {
 				var $tag = $('<li>').append($('<a class="off" href="#">').text(tags[i]));
@@ -26,9 +26,9 @@ jQuery(function($){
 		$.getJSON('/get', function(response){
 			for (var i = 0; i < response.length; i++) {
 				var row = response[i];
+				//var $template = $.parseHTML($('.js-row-template').html().trim())[0];
 				var $template = $($('.js-row-template').html());
-
-				$template.find('.js-client dd').text(row.client_name + 'さん')
+				$template.find('.js-client dd').text(row.client_name + 'さん');
 
 				$('#result').append($template);
 			}
